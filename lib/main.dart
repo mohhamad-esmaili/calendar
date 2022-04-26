@@ -1,4 +1,5 @@
 import 'package:calendar/screens/login_screen.dart';
+import 'package:calendar/screens/verification_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -21,8 +22,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Dana',
+        textTheme: const TextTheme(
+          bodyText1: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
       ),
-      home: LoginScreen(),
+      home: VerifyScreen(),
     );
   }
 }

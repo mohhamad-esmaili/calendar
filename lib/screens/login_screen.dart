@@ -47,51 +47,58 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     var deviceSize = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.only(
-          top: deviceSize.height / 3,
-          left: deviceSize.width / 5,
-          right: deviceSize.width / 5,
-        ),
-        child: Column(
-          children: [
-            const Text('لطفا شماره‌ی همراه خود را وارد کنید.'),
-            const SizedBox(height: 48.0),
-            TextField(
-              keyboardType: TextInputType.number,
-              controller: _textController,
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
-              ],
-              maxLength: 11,
-              decoration: InputDecoration(
-                counterText: "",
-                errorText: _validate ? _validationError : null,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(24.0),
-                ),
-                hintText: 'مثال: 09365464786',
-                hintStyle: const TextStyle(color: Colors.grey),
+      body: Center(
+        child: Container(
+          padding: EdgeInsets.only(
+            top: deviceSize.height / 3,
+            left: deviceSize.width / 5,
+            right: deviceSize.width / 5,
+          ),
+          child: Column(
+            children: [
+              Text(
+                'لطفا شماره‌ی همراه خود را وارد کنید.',
+                style: Theme.of(context).textTheme.bodyText1,
               ),
-            ),
-            const SizedBox(height: 24.0),
-            SendButtonWidget(
-              onPressed: () {
-                if (_inputValidator) {
-                  setState(() {
-                    _validate = true;
-                  });
-                } else {
-                  setState(() {
-                    _validate = false;
-                  });
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => VerifyScreen(),
-                  ));
-                }
-              },
-            )
-          ],
+              const SizedBox(height: 48.0),
+              TextField(
+                keyboardType: TextInputType.number,
+                controller: _textController,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
+                ],
+                maxLength: 11,
+                decoration: InputDecoration(
+                  counterText: "",
+                  errorText: _validate ? _validationError : null,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(24.0),
+                  ),
+                  hintText: 'مثال: 09365464786',
+                  hintStyle: const TextStyle(color: Colors.grey),
+                ),
+              ),
+              const SizedBox(height: 24.0),
+              SendButtonWidget(
+                onPressed: () {
+                  if (_inputValidator) {
+                    setState(() {
+                      _validate = true;
+                    });
+                  } else {
+                    setState(() {
+                      _validate = false;
+                    });
+
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>
+                          VerifyScreen(number: _textController.value.text),
+                    ));
+                  }
+                },
+              )
+            ],
+          ),
         ),
       ),
     );

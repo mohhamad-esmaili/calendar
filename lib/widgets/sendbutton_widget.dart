@@ -8,6 +8,7 @@ class SendButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
+      height: 57,
       onPressed: onPressed,
       elevation: 4,
       child: Ink(
