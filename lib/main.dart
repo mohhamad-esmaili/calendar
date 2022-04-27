@@ -30,20 +30,33 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           fontFamily: 'Dana',
-          appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            centerTitle: true,
+            titleTextStyle: TextStyle(
+              color: Colors.black,
+              fontFamily: 'Dana',
+              fontWeight: FontWeight.w500,
+              fontSize: 18,
+            ),
+          ),
           textTheme: const TextTheme(
             bodyText1: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
+            labelMedium: TextStyle(
+              color: Color.fromARGB(255, 198, 203, 211),
+              fontSize: 15,
+            ),
           ),
         ),
-        home: EventScreen(),
-        initialRoute: EventScreen.routeName,
+        initialRoute: HomeScreen.routeName,
         routes: {
           LoginScreen.routeName: (context) => const LoginScreen(),
           VerifyScreen.routeName: (context) => const VerifyScreen(),
-          HomeScreen.routeName: (context) => const HomeScreen(),
+          HomeScreen.routeName: (context) => HomeScreen(),
           EventScreen.routeName: (context) => const EventScreen(),
         },
       ),

@@ -14,12 +14,19 @@ class _EventScreenState extends State<EventScreen> {
     var _deviceSize = MediaQuery.of(context).size;
 
     BoxDecoration containerDecoration = BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(15),
         border: Border.all(
             color: const Color.fromRGBO(194, 199, 204, 1), width: 1));
     return Scaffold(
       appBar: AppBar(
-        title: const Text("رویداد جدید"),
+        leading: IconButton(
+          icon: const Icon(Icons.close),
+          onPressed: () => Navigator.of(context).pop(null),
+          color: Colors.black,
+        ),
+        title: const Text(
+          "رویداد جدید",
+        ),
       ),
       body: Center(
         child: Container(
@@ -31,30 +38,36 @@ class _EventScreenState extends State<EventScreen> {
             child: Column(
               children: [
                 Container(
-                  padding: EdgeInsets.all(30),
+                  padding: EdgeInsets.symmetric(vertical: 19, horizontal: 30),
                   decoration: containerDecoration,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("نام رویداد"),
+                      const Text(
+                        "نام رویداد",
+                        style: TextStyle(fontWeight: FontWeight.w600),
+                      ),
+                      const SizedBox(height: 5),
                       TextFormField(
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          contentPadding: EdgeInsets.all(20),
+                          hintText: "مانند: جشن نوروز",
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: const BorderSide(
+                              color: Color.fromARGB(255, 233, 235, 238),
+                              width: 1.0,
+                            ),
                           ),
                         ),
                       ),
                     ],
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.all(30),
-                  decoration: containerDecoration,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [const Text("نام رویداد"), TextFormField()],
-                  ),
-                ),
+                const SizedBox(height: 16),
               ],
             ),
           ),

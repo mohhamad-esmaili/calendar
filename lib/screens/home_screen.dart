@@ -1,3 +1,4 @@
+import 'package:calendar/screens/event_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_week_view/flutter_week_view.dart';
@@ -6,6 +7,17 @@ import 'package:shamsi_date/shamsi_date.dart';
 class HomeScreen extends StatelessWidget {
   static const routeName = '/home';
   const HomeScreen({Key? key}) : super(key: key);
+  String _timePostfix(int income) {
+    if (income <= 11) {
+      return "ق.ظ";
+    } else if (income > 11 && income < 12) {
+      return "ظ";
+    } else if (income > 12 && income < 18) {
+      return "ب.ظ";
+    } else {
+      return "شب";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,32 +26,80 @@ class HomeScreen extends StatelessWidget {
     DateTime dateTime = DateTime.now();
     Jalali j = Jalali.fromDateTime(dateTime);
 
+    List dayWeek = [
+      "شنبه",
+      "یکشنبه",
+      "دوشنبه",
+      "سه‌شنبه",
+      "چهارشنبه",
+      "پنج‌شنبه",
+      "جمعه",
+    ];
     return Scaffold(
+      appBar: AppBar(
+        title: Text("${dayWeek[j.weekDay - 1]} ${j.year}/${j.month}/${j.day} "),
+      ),
       body: SafeArea(
         child: DayView(
-          date: j.toDateTime(),
-          events: [
-            FlutterWeekViewEvent(
-              title: 'An event 5',
-              description: 'A description 5',
-              start: date.add(const Duration(hours: 20)),
-              end: date.add(const Duration(hours: 21)),
-            ),
-          ],
+          onHoursColumnTappedDown: (date) {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => EventScreen(),
+            ));
+            print(date);
+          },
+          date: now,
           isRTL: true,
-          initialTime: HourMinute(hour: j.hour),
-          dayBarStyle: const DayBarStyle(
+          initialTime: HourMinute(hour: j.hour, minute: j.minute),
+
+          dayBarStyle: DayBarStyle(
             color: Colors.white,
-            dateFormatter: 
+            dateFormatter: (y, m, d) {
+              return '';
+            },
           ),
-          currentTimeIndicatorBuilder: ,
+          hoursColumnStyle: HoursColumnStyle(
+            textAlignment: Alignment.center,
+            width: 100,
+            timeFormatter: (time) {
+              return "${time.hour}:00 ${_timePostfix(time.hour)}";
+            },
+          ),
+          // currentTimeIndicatorBuilder: (dayViewStyle, f, d, b) {
+          //   return Positioned(
+          //     top: b ? 60 * 2 : now.hour.toDouble() * 2,
+          //     right: 0,
+          //     child: Row(
+          //       children: [
+          //         Container(
+          //           padding: const EdgeInsets.symmetric(horizontal: 10),
+          //           width: 100,
+          //           alignment: Alignment.center,
+          //           decoration: BoxDecoration(
+          //             color: Colors.white,
+          //             border: Border.all(
+          //               color: const Color.fromRGBO(67, 97, 238, 1),
+          //             ),
+          //             borderRadius: BorderRadius.circular(10),
+          //           ),
+          //           child:
+          //               Text('${DateTime.now().hour}:${DateTime.now().minute}'),
+          //         ),
+          //         Container(
+          //           width: MediaQuery.of(context).size.width,
+          //           height: 2,
+          //           color: const Color.fromRGBO(67, 97, 238, 1),
+          //         )
+          //       ],
+          //     ),
+          //   );
+          // },
           style: DayViewStyle.fromDate(
             date: now,
-            currentTimeCircleColor: Colors.pink,
-            hourRowHeight: 90,
+            backgroundRulesColor: Colors.grey,
+            currentTimeRuleColor: const Color.fromRGBO(67, 97, 238, 1),
+            headerSize: 0,
             currentTimeCirclePosition: CurrentTimeCirclePosition.left,
           ),
-          hoursColumnStyle: const HoursColumnStyle(color: Colors.transparent),
         ),
       ),
     );
