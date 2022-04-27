@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class SendButtonWidget extends StatelessWidget {
   final VoidCallback onPressed;
 
-  SendButtonWidget({required this.onPressed});
+  const SendButtonWidget({Key? key, required this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

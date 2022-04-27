@@ -9,6 +9,8 @@ import 'package:provider/provider.dart';
 class VerifyScreen extends StatefulWidget {
   static const routeName = '/verify';
 
+  const VerifyScreen({Key? key}) : super(key: key);
+
   @override
   State<VerifyScreen> createState() => _VerifyScreenState();
 }

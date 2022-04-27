@@ -22,8 +22,8 @@ class HomeScreen extends StatelessWidget {
             FlutterWeekViewEvent(
               title: 'An event 5',
               description: 'A description 5',
-              start: date.add(Duration(hours: 20)),
-              end: date.add(Duration(hours: 21)),
+              start: date.add(const Duration(hours: 20)),
+              end: date.add(const Duration(hours: 21)),
             ),
           ],
           isRTL: true,

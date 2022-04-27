@@ -7,9 +7,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 // pages
 import 'package:calendar/screens/page_exporter.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -38,9 +40,9 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: HomeScreen.routeName,
         routes: {
-          LoginScreen.routeName: (context) => LoginScreen(),
-          VerifyScreen.routeName: (context) => VerifyScreen(),
-          HomeScreen.routeName: (context) => HomeScreen(),
+          LoginScreen.routeName: (context) => const LoginScreen(),
+          VerifyScreen.routeName: (context) => const VerifyScreen(),
+          HomeScreen.routeName: (context) => const HomeScreen(),
         },
       ),
     );
