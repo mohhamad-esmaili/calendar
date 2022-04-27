@@ -1,10 +1,14 @@
+import 'package:calendar/provider/auth.dart';
 import 'package:calendar/screens/verification_screen.dart';
 import 'package:calendar/widgets/sendbutton_widget.dart';
+import 'package:calendar/widgets/snackbox_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
+  static const routeName = '/login';
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -14,6 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _textController = TextEditingController();
   bool _validate = false;
   String _validationError = '';
+
   bool get _inputValidator {
     final text = _textController.value.text;
 
@@ -47,17 +52,18 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     var deviceSize = MediaQuery.of(context).size;
     return Scaffold(
-      body: Center(
+      body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.only(
             top: deviceSize.height / 3,
-            left: deviceSize.width / 5,
-            right: deviceSize.width / 5,
+            left: deviceSize.width / 7,
+            right: deviceSize.width / 7,
           ),
           child: Column(
             children: [
               Text(
                 'لطفا شماره‌ی همراه خود را وارد کنید.',
+                textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               const SizedBox(height: 48.0),
@@ -80,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 24.0),
               SendButtonWidget(
-                onPressed: () {
+                onPressed: () async {
                   if (_inputValidator) {
                     setState(() {
                       _validate = true;
@@ -89,11 +95,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     setState(() {
                       _validate = false;
                     });
-
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) =>
-                          VerifyScreen(number: _textController.value.text),
-                    ));
+                    try {
+                      await Provider.of<Auth>(context, listen: false)
+                          .login(_textController.value.text, () {
+                        Navigator.of(context)
+                            .pushReplacementNamed(VerifyScreen.routeName);
+                      });
+                    } catch (error) {
+                      snackErrors("لطفا اینترنت خود را چک کنید", context);
+                    }
                   }
                 },
               )
