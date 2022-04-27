@@ -19,7 +19,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
   @override
   Widget build(BuildContext context) {
     final _textController = TextEditingController();
-    var deviceSize = MediaQuery.of(context).size;
+    var _deviceSize = MediaQuery.of(context).size;
 
     final _loadedProvider = Provider.of<Auth>(context, listen: true);
 
@@ -28,9 +28,9 @@ class _VerifyScreenState extends State<VerifyScreen> {
         child: Center(
           child: Container(
             padding: EdgeInsets.only(
-              top: deviceSize.height / 3,
-              left: deviceSize.width / 7,
-              right: deviceSize.width / 7,
+              top: _deviceSize.height / 3,
+              left: _deviceSize.width / 7,
+              right: _deviceSize.width / 7,
             ),
             child: Column(
               children: [
@@ -106,7 +106,6 @@ class _VerifyScreenState extends State<VerifyScreen> {
                 const SizedBox(height: 5),
                 SendButtonWidget(onPressed: () async {
                   try {
-                    print(_loadedProvider.otp);
                     _loadedProvider.hasError = false;
                     await _loadedProvider.verify(
                       _loadedProvider.otp!,
@@ -115,7 +114,6 @@ class _VerifyScreenState extends State<VerifyScreen> {
                     );
                   } catch (error) {
                     _loadedProvider.hasError = true;
-                    print(_loadedProvider.hasError);
                   }
                 }),
                 TextButton(

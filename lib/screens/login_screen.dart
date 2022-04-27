@@ -51,14 +51,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var deviceSize = MediaQuery.of(context).size;
+    var _deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.only(
-            top: deviceSize.height / 3,
-            left: deviceSize.width / 7,
-            right: deviceSize.width / 7,
+            top: _deviceSize.height / 3,
+            left: _deviceSize.width / 7,
+            right: _deviceSize.width / 7,
           ),
           child: Column(
             children: [

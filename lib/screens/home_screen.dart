@@ -30,7 +30,9 @@ class HomeScreen extends StatelessWidget {
           initialTime: HourMinute(hour: j.hour),
           dayBarStyle: const DayBarStyle(
             color: Colors.white,
+            dateFormatter: 
           ),
+          currentTimeIndicatorBuilder: ,
           style: DayViewStyle.fromDate(
             date: now,
             currentTimeCircleColor: Colors.pink,
