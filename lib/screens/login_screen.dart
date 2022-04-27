@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+
 import 'package:calendar/provider/auth.dart';
 import 'package:calendar/screens/verification_screen.dart';
 import 'package:calendar/widgets/sendbutton_widget.dart';
 import 'package:calendar/widgets/snackbox_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);

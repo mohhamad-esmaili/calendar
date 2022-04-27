@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:calendar/provider/auth.dart';
-import 'package:calendar/screens/home_screen.dart';
-import 'package:calendar/screens/login_screen.dart';
+import 'package:calendar/screens/page_exporter.dart';
 import 'package:calendar/widgets/sendbutton_widget.dart';
-import 'package:calendar/widgets/snackbox_widget.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +18,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
   Widget build(BuildContext context) {
     final _textController = TextEditingController();
     var deviceSize = MediaQuery.of(context).size;
-    print(Provider.of<Auth>(context, listen: false).userInfo);
+
     final _loadedProvider = Provider.of<Auth>(context, listen: true);
 
     return Scaffold(

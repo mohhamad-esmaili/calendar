@@ -1,10 +1,11 @@
-import 'package:calendar/provider/auth.dart';
-import 'package:calendar/screens/home_screen.dart';
-import 'package:calendar/screens/login_screen.dart';
-import 'package:calendar/screens/verification_screen.dart';
+// packages
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:calendar/provider/auth.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+// pages
+import 'package:calendar/screens/page_exporter.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           fontFamily: 'Dana',
+          appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
           textTheme: const TextTheme(
             bodyText1: TextStyle(
               fontSize: 16,
@@ -34,7 +36,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        initialRoute: LoginScreen.routeName,
+        initialRoute: HomeScreen.routeName,
         routes: {
           LoginScreen.routeName: (context) => LoginScreen(),
           VerifyScreen.routeName: (context) => VerifyScreen(),
