@@ -27,7 +27,6 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  calendar_view: ^0.0.4
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
@@ -35,9 +34,11 @@ dependencies:
     sdk: flutter
     version: ^0.0.0
   flutter_week_view: ^1.2.1+1
+  grpc: ^3.0.2
   http: ^0.13.4
-  intl: ^0.17.0
+  numberpicker: ^2.1.1
   pin_code_fields: ^7.4.0
+  protobuf: ^2.0.1
   provider: ^6.0.2
   shamsi_date: ^1.0.1
 

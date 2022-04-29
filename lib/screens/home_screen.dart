@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
-    DateTime date = DateTime(now.year, now.month, now.day);
+
     DateTime dateTime = DateTime.now();
     Jalali j = Jalali.fromDateTime(dateTime);
 
@@ -40,65 +40,66 @@ class HomeScreen extends StatelessWidget {
         title: Text("${dayWeek[j.weekDay - 1]} ${j.year}/${j.month}/${j.day} "),
       ),
       body: SafeArea(
-        child: DayView(
-          onHoursColumnTappedDown: (date) {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => EventScreen(),
-            ));
-            print(date);
-          },
-          date: now,
-          isRTL: true,
-          initialTime: HourMinute(hour: j.hour, minute: j.minute),
-
-          dayBarStyle: DayBarStyle(
-            color: Colors.white,
-            dateFormatter: (y, m, d) {
-              return '';
-            },
-          ),
-          hoursColumnStyle: HoursColumnStyle(
-            textAlignment: Alignment.center,
-            width: 100,
-            timeFormatter: (time) {
-              return "${time.hour}:00 ${_timePostfix(time.hour)}";
-            },
-          ),
-          // currentTimeIndicatorBuilder: (dayViewStyle, f, d, b) {
-          //   return Positioned(
-          //     top: b ? 60 * 2 : now.hour.toDouble() * 2,
-          //     right: 0,
-          //     child: Row(
-          //       children: [
-          //         Container(
-          //           padding: const EdgeInsets.symmetric(horizontal: 10),
-          //           width: 100,
-          //           alignment: Alignment.center,
-          //           decoration: BoxDecoration(
-          //             color: Colors.white,
-          //             border: Border.all(
-          //               color: const Color.fromRGBO(67, 97, 238, 1),
-          //             ),
-          //             borderRadius: BorderRadius.circular(10),
-          //           ),
-          //           child:
-          //               Text('${DateTime.now().hour}:${DateTime.now().minute}'),
-          //         ),
-          //         Container(
-          //           width: MediaQuery.of(context).size.width,
-          //           height: 2,
-          //           color: const Color.fromRGBO(67, 97, 238, 1),
-          //         )
-          //       ],
-          //     ),
-          //   );
-          // },
-          style: DayViewStyle.fromDate(
+        child: GestureDetector(
+          onTap: () => Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const EventScreen(),
+          )),
+          child: DayView(
             date: now,
-            backgroundRulesColor: Colors.grey,
-            currentTimeRuleColor: const Color.fromRGBO(67, 97, 238, 1),
-            headerSize: 0,
-            currentTimeCirclePosition: CurrentTimeCirclePosition.left,
+            isRTL: true,
+            initialTime: HourMinute(hour: j.hour, minute: j.minute),
+
+            dayBarStyle: DayBarStyle(
+              color: Colors.white,
+              dateFormatter: (y, m, d) {
+                return '';
+              },
+            ),
+            hoursColumnStyle: HoursColumnStyle(
+              textAlignment: Alignment.center,
+              width: 100,
+              timeFormatter: (time) {
+                return "${time.hour}:00 ${_timePostfix(time.hour)}";
+              },
+            ),
+
+            // currentTimeIndicatorBuilder: (dayViewStyle, f, d, b) {
+            //   return Positioned(
+            //     top: b ? 60 * 2 : now.hour.toDouble() * 2,
+            //     right: 0,
+            //     child: Row(
+            //       children: [
+            //         Container(
+            //           padding: const EdgeInsets.symmetric(horizontal: 10),
+            //           width: 100,
+            //           alignment: Alignment.center,
+            //           decoration: BoxDecoration(
+            //             color: Colors.white,
+            //             border: Border.all(
+            //               color: const Color.fromRGBO(67, 97, 238, 1),
+            //             ),
+            //             borderRadius: BorderRadius.circular(10),
+            //           ),
+            //           child:
+            //               Text('${DateTime.now().hour}:${DateTime.now().minute}'),
+            //         ),
+            //         Container(
+            //           width: MediaQuery.of(context).size.width,
+            //           height: 2,
+            //           color: const Color.fromRGBO(67, 97, 238, 1),
+            //         )
+            //       ],
+            //     ),
+            //   );
+            // },
+            style: DayViewStyle.fromDate(
+              date: now,
+              backgroundRulesColor: Colors.grey,
+              currentTimeRuleColor: const Color.fromRGBO(67, 97, 238, 1),
+              hourRowHeight: 50,
+              headerSize: 0,
+              currentTimeCirclePosition: CurrentTimeCirclePosition.left,
+            ),
           ),
         ),
       ),

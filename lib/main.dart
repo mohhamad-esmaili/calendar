@@ -52,11 +52,11 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        initialRoute: HomeScreen.routeName,
+        initialRoute: LoginScreen.routeName,
         routes: {
           LoginScreen.routeName: (context) => const LoginScreen(),
           VerifyScreen.routeName: (context) => const VerifyScreen(),
-          HomeScreen.routeName: (context) => HomeScreen(),
+          HomeScreen.routeName: (context) => const HomeScreen(),
           EventScreen.routeName: (context) => const EventScreen(),
         },
       ),
